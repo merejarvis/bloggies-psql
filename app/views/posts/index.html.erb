@@ -1,0 +1,16 @@
+<h1>All posts by <%= current_user.name %></h1>
+
+<ul>
+  <%@all_posts.each_with_index do |post,index| %>
+  <li>
+    <%= index %>
+<h4><%= post.title %></h4>
+<p><%= post.content %></p>
+
+
+  </li>
+  <% end %>
+</ul>
+
+
+<%= @all_posts.inspect %>

@@ -5,11 +5,13 @@ class PostsController < ApplicationController
   def index
     # render json: current_user.posts
     @all_posts = current_user.posts
+    @new_post = current_user.posts.new
     # render json: current_user.name
   end
 
   def show
-    render html: 'show one post'
+    @post = Post.find(params[:id])
+    # render html: 'show one post'
   end
 
   def new
@@ -17,9 +19,53 @@ class PostsController < ApplicationController
   end
 
   def edit
-    render html: 'edit posts'
+      @update_post= Post.find(params[:id])
+    # render json: @update_post
   end
 
+  def update
+    # updated_post= Post.find(params[:id])
+    # updated_post.title = params[:post][:title]
+    # updated_post.content = params[:post][:content]
+    # updated_post.save
 
+# or
+    Post.find(params[:id]).update(post_params)
+
+    redirect_to posts_path
+  end
+
+  def create
+    # creating_post = params.require(:post).permit(:title, :content, :user_id)
+
+
+    # or
+    # creating_post = current_user.post.build
+    # creating_post.title = params[:post][:title]
+
+
+    # render json: @creating_post
+
+    Post.create(post_params)
+
+    redirect_to posts_path
+  end
+
+  def destroy
+    Post.destroy(params[:id])
+    # OR
+    # deleted_post = Post.find(params[:id])
+    # deletd_post.destroy
+
+    redirect_to posts_path
+  end
+
+private
+
+def post_params
+
+  params.require(:post).permit(:title, :content, :user_id)
+
+end
 
 end

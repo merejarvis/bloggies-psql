@@ -2,15 +2,31 @@
 
 <ul>
   <%@all_posts.each_with_index do |post,index| %>
+  <% if post.id %>
   <li>
-    <%= index %>
+    <!-- <%= index %> -->
 <h4><%= post.title %></h4>
 <p><%= post.content %></p>
-
-
+<%= link_to "View", post_path(post) %>
+<%= link_to "Delete", post_path(post), method: :delete %>
+<%= link_to "Update", edit_post_path(post) %>
   </li>
+  <% end %>
   <% end %>
 </ul>
 
+<%= form_for @new_post do |f| %>
+<%= f.label :title %>
+  <%= f.text_field :title %>
+<br><br>
+  <%= f.label :content %>
+    <%= f.text_area :content %>
+<br><br>
 
-<%= @all_posts.inspect %>
+<%= f.hidden_field :user_id %>
+    <%= f.submit %>
+<% end %>
+
+<%= @new_post.inspect %>
+
+<!-- <%= @all_posts.inspect %> -->

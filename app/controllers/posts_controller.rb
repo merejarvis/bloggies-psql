@@ -3,9 +3,20 @@ class PostsController < ApplicationController
 # before_action :authenticate_user!, only: [:new, :edit]
 #use except
   def index
+
+    news_url = 'https://newsapi.org/v1/articles?source=engadget&sortBy=top&apiKey=1eff6268512d43ff87125794dccec730'
+
+    response = HTTParty.get(news_url)
+
+    # render json: response
+
+    @news = response
+
     # render json: current_user.posts
+
     @all_posts = current_user.posts
     @new_post = current_user.posts.new
+
     # render json: current_user.name
   end
 

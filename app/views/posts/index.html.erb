@@ -1,5 +1,27 @@
 <h1>All posts by <%= current_user.name %></h1>
 
+<h2>News from API</h2>
+
+<ul>
+  <% @news["articles"].each do |article| %>
+
+  <li>
+    <!-- <h2><%= article %></h2> -->
+<h3><%= article['title'] %></h3>
+<p><%= article['description'] %></p>
+<img src= <%= article['urlToImage'] %> alt=<%= article['title'] %>>
+<h5><%= article['publishedAt'] %></h5>
+<a href= <%= article['url']%>> Read more.. </a>
+
+
+  </li>
+
+  <% end %>
+
+</ul>
+
+
+
 <ul>
   <%@all_posts.each_with_index do |post,index| %>
   <% if post.id %>
